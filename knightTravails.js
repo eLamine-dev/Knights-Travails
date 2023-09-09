@@ -1,10 +1,10 @@
 function intToLetter(int) {
    return String.fromCharCode(int + 97).toUpperCase();
 }
-function createBoard() {
+
+export function createBoard() {
    let board = new Map();
    for (let i = 0; i < 8; i++) {
-      // var iLetter = String.fromCharCode(i + 97).toUpperCase();
       for (let j = 0; j < 8; j++) {
          board.set(`${intToLetter(i)}-${j}`, {
             x: i,
@@ -12,17 +12,14 @@ function createBoard() {
             visited: false,
             previousMove: null,
          });
-         // board[`${iLetter}-${j}`] = { x: i, y: j, visited: false };
       }
    }
 
    return board;
 }
 
-// let myBoard = createBoard();
-// console.log(myBoard);
-
 function createKnight(board) {
+   let possibleMoves = [];
    let getPossibleMoves = (x, y) => {
       let knightOffsets = [
          [x + 2, y + 1],
@@ -34,7 +31,7 @@ function createKnight(board) {
          [x - 1, y + 2],
          [x - 1, y - 2],
       ];
-      let possibleMoves = [];
+
       knightOffsets.forEach((offset) => {
          let move = `${intToLetter(offset[0])}-${offset[1]}`;
          if (board.has(move)) possibleMoves.push(move);
@@ -45,11 +42,12 @@ function createKnight(board) {
    return { getPossibleMoves };
 }
 
-function knightTravails(start, end) {
+export function knightMoves(start, end) {
    let myBoard = createBoard();
+   console.log(myBoard);
    let myKnight = createKnight(myBoard);
-
-   let queue = [`${intToLetter(start[0])}-${start[1]}`];
+   let startPosition = `${intToLetter(start[0])}-${start[1]}`;
+   let queue = [startPosition];
 
    let testedMoves = [];
 
@@ -83,47 +81,8 @@ function knightTravails(start, end) {
    return path.reverse();
 }
 
-let result = knightTravails([0, 0], [7, 7]);
+let result = knightMoves([0, 0], [7, 7]);
 
 console.log(`The shortest path was ${result.length} moves!`);
 console.log('The moves were:');
 result.forEach((move) => console.log(move));
-
-// tree.levelOrder = (callBack) => {
-//    let queue = [];
-//    queue.push(tree.root);
-//    let array = [];
-
-//    const levelOrderRec = (node) => {
-//       if (node === null) return;
-//       else if (queue.length > 0) {
-//          let currentNode = queue.shift();
-
-//          callBack ? callBack(currentNode) : array.push(currentNode.data);
-
-//          if (node.left !== null) queue.push(node.left);
-//          if (node.right !== null) queue.push(node.right);
-//          levelOrderRec(queue[0]);
-//       }
-//       if (!callBack) return array;
-//    };
-
-//    return levelOrderRec(queue[0]);
-// };
-
-// // non recursive levelOrder
-// tree.levelOrder2 = (callBack) => {
-//    if (tree.root === null) return;
-//    let queue = [];
-//    queue.push(tree.root);
-//    let array = [];
-
-//    while (queue.length > 0) {
-//       let currentNode = queue.shift();
-//       callBack ? callBack(currentNode) : array.push(currentNode.data);
-//       if (currentNode.left !== null) queue.push(currentNode.left);
-//       if (currentNode.right !== null) queue.push(currentNode.right);
-//    }
-
-//    if (!callBack) return array;
-// };
