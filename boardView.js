@@ -21,8 +21,10 @@ export default function boardView() {
    board.addEventListener(
       'click',
       (e) => {
+         board.classList.add('rock-placed');
+
          if (e.target.classList.contains('square')) {
-            placeKnight(e.target);
+            e.target.classList.add('start');
          }
 
          listenForTarget();
@@ -34,8 +36,9 @@ export default function boardView() {
       board.addEventListener(
          'click',
          (e) => {
+            board.classList.add('target-placed');
             if (e.target.classList.contains('square')) {
-               target.classList.add('target');
+               e.target.classList.add('end');
             }
          },
          { once: true }
@@ -44,7 +47,8 @@ export default function boardView() {
 
    function placeKnight(target) {
       let knight = document.createElement('i');
-      knight.classList.add('fa-solid fa-chess-knight');
+      knight.classList.add('fa-solid');
+      knight.classList.add('fa-chess-knight');
       target.appendChild(knight);
    }
 

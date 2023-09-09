@@ -1,12 +1,19 @@
+body {
+   height: 100vh;
+   width: 100vw;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
 #board {
    background-color: blue;
    display: grid;
 
    grid-template-rows: repeat(8, 1fr);
    grid-template-columns: 1fr;
-
-   height: 800px;
-   width: 800px;
+   width: 600px;
+   height: 600px;
 }
 
 .board-row {
@@ -14,10 +21,57 @@
    grid-template-columns: repeat(8, 1fr);
 }
 
+.square {
+   position: relative;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
 .square.dark {
+   color: white;
    background-color: black;
 }
 
 .square.light {
    background-color: white;
+}
+
+.square.target {
+   background-color: red;
+}
+
+.square::after,
+.square::before {
+   font-family: FontAwesome;
+   font-size: 40px;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: none;
+}
+
+.square.start::after {
+   content: '\f441';
+   display: block;
+}
+
+.square.end::before {
+   content: '\f140';
+   display: block;
+}
+
+#board:not(#board.rock-placed) .square:hover::after {
+   content: '\f441';
+   display: block;
+   opacity: 50%;
+}
+
+#board.rock-placed:not(#board.target-placed)
+   .square:not(.square.start):hover::before {
+   content: '\f140';
+   display: block;
+   opacity: 50%;
 }
