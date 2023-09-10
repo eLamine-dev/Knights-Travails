@@ -18,25 +18,28 @@ body {
 #game-container {
    display: flex;
    align-items: stretch;
-   justify-content: center;
-   gap: 2rem;
+   justify-content: space-between;
+   gap: 1rem;
+   /* border: 2px solid var(--dark); */
+   padding: 1rem;
 }
 
 .board-container {
-   width: 600px;
-   height: 600px;
+   position: relative;
+   width: 80vh;
+   height: 80vh;
    display: grid;
    grid-template-columns: 50px auto 50px;
    grid-template-rows: 50px auto 50px;
-   border: 4px solid var(--dark);
+   border: 3px solid var(--dark);
    background-color: var(--light);
 }
 
 #board {
    background-color: blue;
    display: grid;
-   grid-template-rows: repeat(8, 1fr);
-   grid-template-columns: 1fr;
+   grid-template-columns: repeat(8, 1fr);
+   grid-template-rows: 1fr;
    border: 3px solid var(--dark);
 }
 
@@ -62,17 +65,19 @@ body {
    user-select: none;
 }
 
-.board-row {
+.board-col {
    display: grid;
-   grid-template-columns: repeat(8, 1fr);
+   grid-template-rows: repeat(8, 1fr);
 }
 
 .square {
    position: relative;
    cursor: crosshair;
    display: flex;
-   align-items: center;
-   justify-content: center;
+   align-items: end;
+   justify-content: start;
+   font-size: 1.2rem;
+   padding: 2px;
 }
 
 .square.dark {
@@ -87,8 +92,9 @@ body {
 
 .square::after,
 .square::before {
+   transition: ease-in-out 300ms;
    font-family: FontAwesome;
-   font-size: 40px;
+   font-size: 50px;
    position: absolute;
    top: 50%;
    left: 50%;
@@ -96,10 +102,18 @@ body {
    display: none;
 }
 
-.square.start::after {
+.square.start::after,
+.square.knight::after {
    color: rgb(24, 24, 24);
    content: '\f441';
    display: block;
+}
+
+.square.knight-path::after {
+   /* color: rgb(221, 23, 23); */
+   content: '\f441';
+   display: block;
+   opacity: 0.5;
 }
 
 .square.end::before {
@@ -121,23 +135,31 @@ body {
 }
 
 .side-bar {
+   width: 300px;
    display: grid;
    grid-template-rows: auto auto 1fr auto;
    align-content: start;
+   gap: 1rem;
+   padding: 1rem 1rem 0 1rem;
 }
 
 .side-bar li {
-   height: 1.3rem;
+   height: 1.6rem;
 }
 
 .buttons {
-   display: flex;
-   /* flex-direction: column; */
+   display: grid;
+   grid-template-columns: auto 1fr auto;
    gap: 1rem;
 }
 
+i {
+   pointer-events: none;
+}
+
 #go-btn,
-#reset-btn {
+#reset-btn,
+.repository {
    outline: none;
    border: none;
    background-color: var(--light);
@@ -146,4 +168,20 @@ body {
    width: 2rem;
    font-size: 2rem;
    cursor: pointer;
+}
+
+.repository {
+   display: flex;
+   align-items: center;
+   text-decoration: none;
+   justify-self: flex-end;
+}
+
+#result {
+   text-wrap: wrap;
+}
+
+h2,
+h3 {
+   margin: 0;
 }

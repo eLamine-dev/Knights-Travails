@@ -43,29 +43,27 @@ function createKnight(board) {
 }
 
 export function knightMoves(start, end) {
-   let myBoard = createBoard();
-   console.log(myBoard);
-   let myKnight = createKnight(myBoard);
+   let board = createBoard();
+   let knight = createKnight(board);
    let startPosition = `${intToLetter(start[0])}-${start[1]}`;
    let queue = [startPosition];
 
-   let testedMoves = [];
+   // let testedMoves = [];
 
    while (queue.length > 0) {
       let currentMove = queue.shift();
-      let x = myBoard.get(currentMove).x;
-      let y = myBoard.get(currentMove).y;
-      myBoard.get(currentMove).visited = true;
+      let x = board.get(currentMove).x;
+      let y = board.get(currentMove).y;
+      board.get(currentMove).visited = true;
       if (x === end[0] && y === end[1]) {
-         testedMoves.push(currentMove);
          break;
       }
-      let possibleMoves = myKnight.getPossibleMoves(x, y);
+      let possibleMoves = knight.getPossibleMoves(x, y);
       possibleMoves.forEach((move) => {
-         if (!myBoard.get(move).visited) {
-            myBoard.get(move).visited = true;
-            myBoard.get(move).previousMove = currentMove;
-            testedMoves.push(move);
+         if (!board.get(move).visited) {
+            board.get(move).visited = true;
+            board.get(move).previousMove = currentMove;
+
             queue.push(move);
          }
       });
@@ -73,16 +71,12 @@ export function knightMoves(start, end) {
 
    let path = [];
    let target = `${intToLetter(end[0])}-${end[1]}`;
-   while (testedMoves.includes(target)) {
+   while (target !== startPosition) {
       path.push(target);
-      target = myBoard.get(target).previousMove;
+      target = board.get(target).previousMove;
    }
 
    return path.reverse();
 }
 
-let result = knightMoves([1, 1], [8, 8]);
-
-console.log(`The shortest path was ${result.length} moves!`);
-console.log('The moves were:');
-result.forEach((move) => console.log(move));
+// let result = knightMoves([1, 1], [8, 8]);
