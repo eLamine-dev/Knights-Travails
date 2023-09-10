@@ -184,7 +184,8 @@ i {
 }
 
 h2,
-h3 {
+h3,
+p {
    margin: 0;
 }
 
@@ -228,7 +229,7 @@ h3 {
       padding: 0;
       width: auto;
       display: grid;
-
+      gap: 1rem;
       grid-template-rows: auto auto 1fr;
       column-gap: 2rem;
    }
@@ -242,11 +243,17 @@ h3 {
    }
 
    #result ol {
-      height: 100px;
+      height: 4rem;
       display: flex;
+
       justify-content: flex-start;
       flex-direction: column;
       flex-wrap: wrap;
+      align-content: flex-start;
+   }
+
+   #result li {
+      width: 7rem;
    }
 
    .square::after,
