@@ -93,7 +93,7 @@ body {
 .square::before {
    transition: ease-in-out 300ms;
    font-family: FontAwesome;
-   font-size: 50px;
+   font-size: 3rem;
    position: absolute;
    top: 50%;
    left: 50%;
@@ -199,6 +199,9 @@ h3 {
 }
 
 @media only screen and (max-width: 750px) {
+   html {
+      font-size: 80%;
+   }
    body {
       padding: 0;
       height: auto;
@@ -248,5 +251,10 @@ h3 {
       justify-content: flex-start;
       flex-direction: column;
       flex-wrap: wrap;
+   }
+
+   .square::after,
+   .square::before {
+      font-size: 2rem;
    }
 }
