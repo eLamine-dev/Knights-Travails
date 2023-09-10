@@ -14,5 +14,33 @@
       <script src="./index.js" type="module"></script>
       <title>Document</title>
    </head>
-   <body></body>
+   <body>
+      <div id="game-container">
+         <div class="side-bar">
+            <h2>Knight Travails</h2>
+            <div id="instructions">
+               <h3>Instructions:</h3>
+               <ol>
+                  <li>Place the knight</li>
+                  <li>Select a target position</li>
+                  <li>Click start flag</li>
+                  <li>Reset and repeat</li>
+               </ol>
+            </div>
+
+            <div class="result">
+               <h3>Result:</h3>
+               <div id="result"></div>
+            </div>
+            <div class="buttons">
+               <button id="go-btn">
+                  <i class="fa-solid fa-flag-checkered"></i>
+               </button>
+               <button id="reset-btn">
+                  <i class="fa-solid fa-rotate-right"></i>
+               </button>
+            </div>
+         </div>
+      </div>
+   </body>
 </html>

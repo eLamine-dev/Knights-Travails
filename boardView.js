@@ -8,6 +8,7 @@ export default function boardView() {
 
       for (let j = 1; j <= 8; j++) {
          let square = document.createElement('div');
+         square.setAttribute('value', JSON.stringify([i, j]));
          square.id = `${i}-${j}`;
          square.classList.add('square');
          // square.innerText = `${i}-${j}`;
