@@ -1,4 +1,4 @@
-function intToLetter(int) {
+export function intToLetter(int) {
    return String.fromCharCode(int + 96).toUpperCase();
 }
 
@@ -42,13 +42,11 @@ function createKnight(board) {
    return { getPossibleMoves };
 }
 
-export function knightMoves(start, end) {
+export default function knightMoves(start, end) {
    let board = createBoard();
    let knight = createKnight(board);
    let startPosition = `${intToLetter(start[0])}-${start[1]}`;
    let queue = [startPosition];
-
-   // let testedMoves = [];
 
    while (queue.length > 0) {
       let currentMove = queue.shift();
@@ -78,5 +76,3 @@ export function knightMoves(start, end) {
 
    return path.reverse();
 }
-
-// let result = knightMoves([1, 1], [8, 8]);

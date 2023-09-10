@@ -1,6 +1,4 @@
-function intToLetter(int) {
-   return String.fromCharCode(int + 96).toUpperCase();
-}
+import { intToLetter } from './knightTravails.js';
 
 class boardContainer extends HTMLElement {
    connectedCallback() {
@@ -72,17 +70,27 @@ class boardContainer extends HTMLElement {
    }
 
    highlightPath(path) {
+      let result = document.getElementById('result');
+      let message = document.createElement('p');
+      message.textContent = `You made it in ${path.length} moves!  Here's your path:`;
+      let movesList = document.createElement('ol');
+      result.appendChild(message);
+      result.appendChild(movesList);
+
       function showPath(position, endPosition, i) {
          let square = document.getElementById(position);
          if (square.classList.contains('end')) {
             square.classList.remove('end');
          }
          square.classList.add('knight');
+         square.innerText = i + 1;
+         let moveLi = document.createElement('li');
+         moveLi.textContent = position;
+         movesList.append(moveLi);
          setTimeout(() => {
             if (position !== endPosition) {
                square.classList.remove('knight');
                square.classList.add('knight-path');
-               square.innerText = i + 1;
             }
          }, 800);
       }
