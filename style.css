@@ -28,8 +28,8 @@ body {
    width: 80vh;
    height: 80vh;
    display: grid;
-   grid-template-columns: 50px auto 50px;
-   grid-template-rows: 50px auto 50px;
+   grid-template-columns: 7% 1fr 7%;
+   grid-template-rows: 7% 1fr 7%;
    border: 3px solid var(--dark);
    background-color: var(--light);
 }
@@ -48,7 +48,7 @@ body {
    justify-items: center;
    align-items: center;
    grid-template-columns: repeat(8, 1fr);
-   padding: 0 50px 0 50px;
+   padding: 0 7% 0 7%;
 }
 
 .numbersCol {
@@ -91,7 +91,7 @@ body {
 
 .square::after,
 .square::before {
-   transition: ease-in-out 300ms;
+   transition: all ease-in-out 300ms;
    font-family: FontAwesome;
    font-size: 3rem;
    position: absolute;
@@ -152,8 +152,7 @@ body {
 .buttons {
    display: grid;
    grid-template-columns: auto 1fr auto;
-
-   gap: 1rem;
+   gap: 2rem;
 }
 
 i {
@@ -223,22 +222,19 @@ h3 {
       width: 95vw;
       height: 95vw;
       display: grid;
-      grid-template-columns: 7% 1fr 7%;
-      grid-template-rows: 7% 1fr 7%;
    }
 
    .side-bar {
       padding: 0;
       width: auto;
       display: grid;
-      grid-template-columns: auto 1fr;
+
       grid-template-rows: auto auto 1fr;
       column-gap: 2rem;
    }
 
    .buttons {
       order: -1;
-      grid-column: 1/-1;
    }
 
    .title {
@@ -246,7 +242,7 @@ h3 {
    }
 
    #result ol {
-      height: 120px;
+      height: 100px;
       display: flex;
       justify-content: flex-start;
       flex-direction: column;

@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
          let start = board.querySelector('.start').getAttribute('coords');
          let end = board.querySelector('.end').getAttribute('coords');
          let path = knightMoves(JSON.parse(start), JSON.parse(end));
-         // showResult(path);
          board.highlightPath(path);
       }
       if (ev.target.id === 'reset-btn') {

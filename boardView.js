@@ -4,6 +4,7 @@ class boardContainer extends HTMLElement {
    connectedCallback() {
       this.board = document.createElement('div');
       this.render(this.board);
+      this.addEventListeners();
    }
 
    render(board) {
@@ -52,8 +53,6 @@ class boardContainer extends HTMLElement {
       this.appendChild(board);
       this.appendChild(numbersColRight);
       this.appendChild(lettersRowBottom);
-
-      this.listenForKnight(board);
    }
 
    reset() {
@@ -66,7 +65,6 @@ class boardContainer extends HTMLElement {
          square.classList.remove('knight-path');
          square.innerText = '';
       });
-      this.listenForKnight();
    }
 
    highlightPath(path) {
@@ -108,31 +106,23 @@ class boardContainer extends HTMLElement {
       }
    }
 
-   listenForKnight() {
-      this.board.addEventListener(
-         'click',
-         (e) => {
-            if (e.target.classList.contains('square')) {
-               e.target.classList.add('start');
-               this.board.classList.add('knight-placed');
-            }
-            this.listenForTarget();
-         },
-         { once: true }
-      );
-   }
-
-   listenForTarget() {
-      this.board.addEventListener(
-         'click',
-         (e) => {
+   addEventListeners() {
+      this.board.addEventListener('click', (e) => {
+         if (
+            e.target.classList.contains('square') &&
+            !this.board.classList.contains('knight-placed')
+         ) {
+            e.target.classList.add('start');
+            this.board.classList.add('knight-placed');
+         } else if (
+            e.target.classList.contains('square') &&
+            this.board.classList.contains('knight-placed') &&
+            !this.board.classList.contains('target-placed')
+         ) {
             this.board.classList.add('target-placed');
-            if (e.target.classList.contains('square')) {
-               e.target.classList.add('end');
-            }
-         },
-         { once: true }
-      );
+            e.target.classList.add('end');
+         }
+      });
    }
 }
 
