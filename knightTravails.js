@@ -1,11 +1,11 @@
 function intToLetter(int) {
-   return String.fromCharCode(int + 97).toUpperCase();
+   return String.fromCharCode(int + 96).toUpperCase();
 }
 
 export function createBoard() {
    let board = new Map();
-   for (let i = 0; i < 8; i++) {
-      for (let j = 0; j < 8; j++) {
+   for (let i = 1; i <= 8; i++) {
+      for (let j = 1; j <= 8; j++) {
          board.set(`${intToLetter(i)}-${j}`, {
             x: i,
             y: j,
@@ -81,7 +81,7 @@ export function knightMoves(start, end) {
    return path.reverse();
 }
 
-let result = knightMoves([0, 0], [7, 7]);
+let result = knightMoves([1, 1], [8, 8]);
 
 console.log(`The shortest path was ${result.length} moves!`);
 console.log('The moves were:');
