@@ -19,7 +19,6 @@ class boardContainer extends HTMLElement {
             square.setAttribute('coords', JSON.stringify([i, j]));
             square.id = `${intToLetter(i)}-${j}`;
             square.classList.add('square');
-            // square.innerText = `${intToLetter(i)}-${j}`;
             if ((i + j) % 2 === 0) square.classList.add('dark');
             else square.classList.add('light');
 
@@ -65,6 +64,7 @@ class boardContainer extends HTMLElement {
          square.classList.remove('knight-path');
          square.innerText = '';
       });
+      document.getElementById('result').innerHTML = '';
    }
 
    highlightPath(path) {
@@ -75,7 +75,7 @@ class boardContainer extends HTMLElement {
       result.appendChild(message);
       result.appendChild(movesList);
 
-      function showPath(position, endPosition, i) {
+      const showPath = (position, endPosition, i) => {
          let square = document.getElementById(position);
          if (square.classList.contains('end')) {
             square.classList.remove('end');
@@ -90,8 +90,8 @@ class boardContainer extends HTMLElement {
                square.classList.remove('knight');
                square.classList.add('knight-path');
             }
-         }, 800);
-      }
+         }, 700);
+      };
 
       for (let i = 0; i < path.length; i++) {
          setTimeout(() => {
@@ -102,7 +102,7 @@ class boardContainer extends HTMLElement {
                startSquare.innerText = 0;
             }
             showPath(path[i], path[path.length - 1], i);
-         }, 1000 + i * 800);
+         }, 700 + i * 700);
       }
    }
 

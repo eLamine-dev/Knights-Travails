@@ -3,8 +3,9 @@ import knightMoves from './knightTravails.js';
 
 document.addEventListener('DOMContentLoaded', () => {
    let board = new boardContainer();
-   document.getElementById('game-container').prepend(board);
-   document.getElementById('game-container').addEventListener('click', (ev) => {
+   let gameContainer = document.getElementById('game-container');
+   gameContainer.prepend(board);
+   gameContainer.addEventListener('click', (ev) => {
       if (
          ev.target.id === 'go-btn' &&
          board.querySelector('.start') &&
@@ -16,23 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
          board.highlightPath(path);
       }
       if (ev.target.id === 'reset-btn') {
-         document.getElementById('result').innerHTML = '';
          board.reset();
       }
    });
 });
-
-// function showResult(path) {
-//    let result = document.getElementById('result');
-//    let message = document.createElement('p');
-//    message.textContent = `You made it in ${path.length} moves!  Here's your path:`;
-//    let movesList = document.createElement('ol');
-//    path.forEach((move) => {
-//       let moveLi = document.createElement('li');
-//       moveLi.textContent = move;
-//       movesList.append(moveLi);
-//    });
-
-//    result.appendChild(message);
-//    result.appendChild(movesList);
-// }

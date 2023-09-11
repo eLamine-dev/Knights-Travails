@@ -19,7 +19,6 @@ export function createBoard() {
 }
 
 function createKnight(board) {
-   let possibleMoves = [];
    let getPossibleMoves = (x, y) => {
       let knightOffsets = [
          [x + 2, y + 1],
@@ -31,6 +30,8 @@ function createKnight(board) {
          [x - 1, y + 2],
          [x - 1, y - 2],
       ];
+
+      let possibleMoves = [];
 
       knightOffsets.forEach((offset) => {
          let move = `${intToLetter(offset[0])}-${offset[1]}`;
@@ -46,6 +47,7 @@ export default function knightMoves(start, end) {
    let board = createBoard();
    let knight = createKnight(board);
    let startPosition = `${intToLetter(start[0])}-${start[1]}`;
+   let endPosition = `${intToLetter(end[0])}-${end[1]}`;
    let queue = [startPosition];
 
    while (queue.length > 0) {
@@ -53,25 +55,24 @@ export default function knightMoves(start, end) {
       let x = board.get(currentMove).x;
       let y = board.get(currentMove).y;
       board.get(currentMove).visited = true;
-      if (x === end[0] && y === end[1]) {
-         break;
-      }
+
+      if (currentMove === endPosition) break;
+
       let possibleMoves = knight.getPossibleMoves(x, y);
       possibleMoves.forEach((move) => {
          if (!board.get(move).visited) {
             board.get(move).visited = true;
             board.get(move).previousMove = currentMove;
-
             queue.push(move);
          }
       });
    }
 
    let path = [];
-   let target = `${intToLetter(end[0])}-${end[1]}`;
-   while (target !== startPosition) {
-      path.push(target);
-      target = board.get(target).previousMove;
+   let pathMove = endPosition;
+   while (pathMove !== startPosition) {
+      path.push(pathMove);
+      pathMove = board.get(pathMove).previousMove;
    }
 
    return path.reverse();
